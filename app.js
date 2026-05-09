@@ -61,3 +61,5 @@ app.use(session({
 app.use(passport.authenticate('session'))
 
 app.use('/api/v1/auth/', authRouter)
+
+export default app

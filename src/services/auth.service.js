@@ -1,6 +1,6 @@
 import argon2 from 'argon2'
 import jwt from 'jsonwebtoken'
-import { JWT_SECRET } from '../src/config/env.js'
+import { JWT_SECRET } from '../config/env.js'
 
 export default class AuthService {
 
