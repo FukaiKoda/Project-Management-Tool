@@ -47,12 +47,14 @@ We are adopting strict boundaries to isolate domain logic from the web framework
 - ES Modules (`type: "module"`) enabled.
 - **Pending Installs:** `typeorm`, `pg`, `reflect-metadata` (required for TypeORM decorators), `socket.io`, `multer`.
 
-### Project Status: Paused for Fundamentals Learning
-The project is temporarily paused. The user is currently taking time to learn fundamental relational database concepts before diving into TypeORM implementation. 
-**Topics being studied:**
-1. Tables, Primary Keys, and Foreign Keys.
-2. The 3 types of relationships: One-to-One, One-to-Many, and Many-to-Many (and Junction Tables).
-3. The conceptual understanding of Database Joins.
+### Project Status: Resumed - Database Implementation
+The user has successfully reviewed and demonstrated a strong understanding of fundamental relational database concepts (Primary/Foreign Keys, Relationships, Joins). We have now resumed the project and are actively setting up the database layer.
 
-**Next Step upon Return:** 
-We will review what was learned, conceptualize the database schema (Workspace, Board, List, Card, User), and translate those relationships into TypeORM entities. After that, we will proceed with the initial server architecture setup.
+**Recent Accomplishments:**
+1. Upgraded the project to support TypeScript execution for TypeORM entities (via `tsx` and `tsconfig.json`) while maintaining `.js` for Express logic.
+2. Created the foundational `User` entity (`user.entity.ts`) with UUIDs, unique constraints, and automatic timestamps.
+
+**Next Steps:**
+1. Implement the remaining core TypeORM entities: `Workspace`, `Board`, `List`, and `Card` based on the defined mental model.
+2. Define the relationships (One-to-Many, Many-to-Many) between these entities using TypeORM decorators.
+3. Install and configure the PostgreSQL database connection.

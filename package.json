@@ -4,7 +4,7 @@
   "description": "This is the last project in my express learning roadmap, a Trello clone",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "tsx watch index.js"
   },
   "keywords": [],
   "author": "habdella",
@@ -34,6 +34,6 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "tsx": "^4.21.0"
   }
 }
