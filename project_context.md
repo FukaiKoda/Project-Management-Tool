@@ -53,8 +53,10 @@ The user has successfully reviewed and demonstrated a strong understanding of fu
 **Recent Accomplishments:**
 1. Upgraded the project to support TypeScript execution for TypeORM entities (via `tsx` and `tsconfig.json`) while maintaining `.js` for Express logic.
 2. Created the foundational `User` entity (`user.entity.ts`) with UUIDs, unique constraints, and automatic timestamps.
+3. Implemented the core TypeORM entities: `Workspace`, `Board`, `List`, and `Card`.
+4. Defined the essential One-to-Many and Many-to-One relationships between these entities.
 
 **Next Steps:**
-1. Implement the remaining core TypeORM entities: `Workspace`, `Board`, `List`, and `Card` based on the defined mental model.
-2. Define the relationships (One-to-Many, Many-to-Many) between these entities using TypeORM decorators.
-3. Install and configure the PostgreSQL database connection.
+1. Implement Many-to-Many relationships (e.g., Workspace Members, Card Assignees) later as needed.
+2. Install and configure the PostgreSQL database connection and TypeORM DataSource.
+3. Set up the Repository pattern for database interactions.

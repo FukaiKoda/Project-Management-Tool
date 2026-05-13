@@ -1,4 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column,
+         CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+
+import Workspace from './workspace.entity.js';
 
 @Entity('users')
 export default class User {
@@ -13,7 +16,13 @@ export default class User {
     email: string
 
     @Column()
-    passwordHash: string;
+    password: string
+
+    @Column({ nullable: true })
+    avatarUrl: string
+
+    @OneToMany(() => Workspace, (workspace) => workspace.owner)
+    workspaces: Workspace[]
 
     @CreateDateColumn()
     createdAt: Date
