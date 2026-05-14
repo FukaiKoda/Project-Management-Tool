@@ -12,7 +12,11 @@ import { REDIS_URL, SESSION_SECRECT } from './src/config/env.js'
 
 import authRouter from './src/routes/auth.route.js'
 
+import { setupSwagger } from './src/config/swagger.js'
+
 const app = express()
+
+setupSwagger(app)
 
 app.use(rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -30,7 +34,7 @@ app.use(morgan('dev'))
 
 app.use(express.json({ limit: '10kb' }))
 
-app.use(express.static(path.join(import.meta.dirname, 'public')))
+// app.use(express.static(path.join(import.meta.dirname, 'public')))
 
 
 const redisClient = createClient({ url: REDIS_URL })
