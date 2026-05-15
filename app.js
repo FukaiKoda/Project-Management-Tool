@@ -8,7 +8,7 @@ import session from 'express-session'
 import { passport } from './src/containers/auth.container.js'
 import { createClient } from 'redis'
 import { RedisStore } from 'connect-redis'
-import { REDIS_URL, SESSION_SECRECT } from './src/config/env.js'
+import { REDIS_URL, SESSION_SECRET } from './src/config/env.js'
 
 import authRouter from './src/routes/auth.route.js'
 
@@ -51,7 +51,7 @@ try
 
 app.use(session({
     store: new RedisStore({ client: redisClient }), 
-    secret: SESSION_SECRECT,
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {

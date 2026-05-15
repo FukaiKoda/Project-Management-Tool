@@ -6,7 +6,9 @@ const authRouter = express.Router()
 
 authRouter.post('/signup', authMiddleware.signup, authController.signup)
 
-authRouter.post('/login', authMiddleware.login, authController.login)
+authRouter.post('/login', authMiddleware.login, passport.authenticate('local'), authController.login)
+
+authRouter.post('/logout', authController.logout)
 
 authRouter.post('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 

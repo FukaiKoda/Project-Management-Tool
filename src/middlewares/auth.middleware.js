@@ -1,4 +1,5 @@
 import z from 'zod'
+import AppError from '../utils/app.error.js';
 
 export default class AuthMiddleware {
 
@@ -41,5 +42,13 @@ export default class AuthMiddleware {
         
         req.body = {...req.body, ...result.data}
         next()
+    }
+
+    isAuthenticated = (req, res, next) => {
+        
+        if (req.isAuthenticated()) {
+            return next()
+        }
+        return next(new AppError('Unauthorized', 401))
     }
 }

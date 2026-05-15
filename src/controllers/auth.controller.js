@@ -9,7 +9,14 @@ export default class AuthController {
         try {
             const { username, email, password } = req.body
             const user = await this.authService.signup({ username, email, password })
-            res.status(200).json(user)
+
+            req.login(user, (err) => {
+                
+                if (err) {
+                    return next(err)
+                }
+                return res.status(200).json({ message: 'Signup successful', user })
+            })
         }
         catch (error) {
             next(error)
@@ -18,15 +25,23 @@ export default class AuthController {
 
     login = async (req, res, next) => {
 
-        try {
-            const { username, password } = req.body
-            const user = await this.authService.login({ username, password })
+        res.status(200).json({ message: 'Login successful', user: req.user })
+    }
+
+    logout = (req, res, next) => {
+        req.logout((err) => {
             
-            const {jwt, refreshJwt} = generateJWT(user)
-            res.status(200).json(jwt, refreshJwt)
-        }
-        catch (error) {
-            next(error)
-        }
+            if (err) {
+                return next(err)
+            }
+            req.session.destroy((err) => {
+                
+                if (err) {
+                    return next(err)
+                }
+                res.clearCookie('connect.sid')
+                return res.status(200).json({ message: 'Logged out successfully' })
+            })
+        })
     }
 }

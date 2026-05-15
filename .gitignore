@@ -1,6 +1,6 @@
 # Dependencies
 node_modules/
-
+secrets/
 # Environment Variables
 .env
 .env.local

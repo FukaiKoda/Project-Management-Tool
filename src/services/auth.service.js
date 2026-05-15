@@ -1,6 +1,5 @@
 import argon2 from 'argon2'
-import jwt from 'jsonwebtoken'
-import { JWT_SECRET } from '../config/env.js'
+import AppError from '../utils/app.error.js'
 
 export default class AuthService {
 
@@ -26,6 +25,10 @@ export default class AuthService {
             throw new AppError('Invalid Credentials', 401)
         }
         
+        if (!storedUser.password) {
+            throw new AppError('Please login using your OAuth provider', 401)
+        }
+
         const isMatch = await argon2.verify(password, storedUser.password)
         
         if (!isMatch) {
@@ -33,19 +36,6 @@ export default class AuthService {
         }
 
         return storedUser
-    }
-
-    generateJWT = (userData) => {
-
-        const payload = {
-            sub: userData.id,
-            role: userData.role
-        }
-
-        const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' })
-        const refreshToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' })
-
-        return { token, refreshToken }
     }
 
     handleOAuthLogin = async (profile, provider) => {
@@ -58,7 +48,6 @@ export default class AuthService {
             user = await this.authRepository.createUser({
                 username: username,
                 email: email,
-                password: `${provider}_PROVIDER`
             })
         }
 

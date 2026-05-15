@@ -1,0 +1,41 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+
+    - name: Install Dependencies
+
+      run: npm ci
+
+    - name: Create Dummy Secrets for Build/Test
+      # These are just some placeholders for now
+      run: |
+        mkdir -p secrets
+        echo "dummy_secret" > secrets/session_secret.txt
+        echo "dummy_id" > secrets/google_client_id.txt
+        echo "dummy_secret" > secrets/google_client_secret.txt
+        echo "dummy_id" > secrets/github_client_id.txt
+        echo "dummy_secret" > secrets/github_client_secret.txt
+        echo "dummy_password" > secrets/db_password.txt
+
+    - name: Run Tests (Placeholder)
+      
+      # run: npm test
+      run: echo "No tests configured yet. Skipping..."
