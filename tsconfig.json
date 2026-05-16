@@ -7,13 +7,11 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    
-    /* TypeORM specific settings */
+
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strictPropertyInitialization": false,
-    
-    /* Allow mixing JS and TS */
+
     "allowJs": true
   },
   "include": [

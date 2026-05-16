@@ -9,6 +9,8 @@ import { passport } from './src/containers/auth.container.js'
 import { createClient } from 'redis'
 import { RedisStore } from 'connect-redis'
 import { REDIS_URL, SESSION_SECRET } from './src/config/env.js'
+import 'reflect-metadata'
+import AppDataSource from './src/config/data-source.js'
 
 import authRouter from './src/routes/auth.route.js'
 
@@ -63,6 +65,15 @@ app.use(session({
 }))
 
 app.use(passport.authenticate('session'))
+
+AppDataSource.initialize()
+    .then(() => {
+        console.log("Data Source has been initialized")
+    })
+    .catch((error) => {
+        console.error("Error during data source initialization: ", error)
+        process.exit(1)
+    })
 
 app.use('/api/v1/auth/', authRouter)
 

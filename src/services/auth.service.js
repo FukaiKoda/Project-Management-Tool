@@ -19,7 +19,7 @@ export default class AuthService {
     login = async (userData) => {
 
         const { username, password } = userData
-        const storedUser = await this.authRepository.findUserByusername(username)
+        const storedUser = await this.authRepository.findUserByUsername(username)
         
         if (!storedUser) {
             throw new AppError('Invalid Credentials', 401)

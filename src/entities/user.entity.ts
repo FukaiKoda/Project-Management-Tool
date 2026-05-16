@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column,
          CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 
-import Workspace from './workspace.entity.js';
+import WorkspaceMember from './workspaceMember.entity.js';
 
 @Entity('users')
 export default class User {
@@ -12,17 +12,17 @@ export default class User {
     @Column({ unique: true, type: 'varchar', length: 30 })
     username: string
 
-    @Column({ unique: true })
+    @Column({ type: 'varchar', unique: true })
     email: string
 
-    @Column({ nullable: true })
+    @Column({ type: 'varchar', nullable: true })
     password: string
 
-    @Column({ nullable: true })
+    @Column({ type: 'varchar', nullable: true })
     avatarUrl: string
 
-    @OneToMany(() => Workspace, (workspace) => workspace.owner)
-    workspaces: Workspace[]
+    @OneToMany(() => WorkspaceMember, (workspaceMember) => workspaceMember.user)
+    workspaceMembers: WorkspaceMember[]
 
     @CreateDateColumn()
     createdAt: Date

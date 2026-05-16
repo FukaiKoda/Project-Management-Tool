@@ -4,6 +4,7 @@ import { Entity, PrimaryGeneratedColumn, Column,
 
 import User from './user.entity.js';
 import Board from './board.entity.js';
+import WorkspaceMember from './workspaceMember.entity.js';
 
 @Entity('workspaces')
 export default class Workspace {
@@ -17,8 +18,8 @@ export default class Workspace {
     @Column({ type: 'text' })
     description: string
 
-    @ManyToOne(() => User, (user) => user.workspaces)
-    owner: User
+    @OneToMany(() => WorkspaceMember, (workspaceMember) => workspaceMember.workspace)
+    members: WorkspaceMember[]
 
     @OneToMany(() => Board, (board) => board.workspace)
     boards: Board[]

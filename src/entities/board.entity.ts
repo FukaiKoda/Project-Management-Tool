@@ -17,7 +17,7 @@ export default class Board {
     @Column({ type: 'text' })
     description: string
 
-    @Column({ nullable: true})
+    @Column({ type: 'varchar', nullable: true })
     background: string
 
     @ManyToOne(() => Workspace, (workspace) => workspace.boards)
