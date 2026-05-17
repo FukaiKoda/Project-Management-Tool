@@ -7,7 +7,7 @@ This is the final, "Hard" level project from the backend practice roadmap. The g
 - **Framework:** Express.js (v5, using ES Modules)
 - **Database:** PostgreSQL
 - **ORM:** TypeORM (Class-based, heavily uses decorators to prepare for NestJS)
-- **Authentication:** JWT (Short-lived Access + Long-lived Refresh tokens via HttpOnly cookies) + OAuth (Google/GitHub via Passport)
+- **Authentication:** Session-Based Authentication + OAuth (Google/GitHub via Passport)
 - **Hashing:** argon2
 - **Real-time:** WebSockets (`socket.io`)
 - **Caching & Sessions:** Redis (`connect-redis`, `redis`)
@@ -43,20 +43,33 @@ We are adopting strict boundaries to isolate domain logic from the web framework
 - **Security:** Helmet, CORS, Rate Limiting, securely stored tokens.
 
 ## Current Setup & Next Steps
-- `package.json` initialized with core Express, auth (passport, argon2, jwt), and redis packages.
+- `package.json` initialized with core Express, auth (passport, argon2), and redis packages.
 - ES Modules (`type: "module"`) enabled.
-- **Pending Installs:** `typeorm`, `pg`, `reflect-metadata` (required for TypeORM decorators), `socket.io`, `multer`.
+- All core dependencies installed (`typeorm`, `pg`, `reflect-metadata`, `socket.io`, `multer`, `zod`).
 
-### Project Status: Resumed - Database Implementation
-The user has successfully reviewed and demonstrated a strong understanding of fundamental relational database concepts (Primary/Foreign Keys, Relationships, Joins). We have now resumed the project and are actively setting up the database layer.
+### Project Status: Backend Core Implementation
+We have established the database layer with TypeORM and implemented the authentication flow. We are now moving towards implementing the core project management features.
 
 **Recent Accomplishments:**
 1. Upgraded the project to support TypeScript execution for TypeORM entities (via `tsx` and `tsconfig.json`) while maintaining `.js` for Express logic.
-2. Created the foundational `User` entity (`user.entity.ts`) with UUIDs, unique constraints, and automatic timestamps.
-3. Implemented the core TypeORM entities: `Workspace`, `Board`, `List`, and `Card`.
-4. Defined the essential One-to-Many and Many-to-One relationships between these entities.
+2. Created core TypeORM entities: `User`, `Workspace`, `Board`, `List`, `Card`, and `WorkspaceMember`.
+3. Configured PostgreSQL database connection and TypeORM DataSource in `src/config/data-source.js` and initialized it in `app.js`.
+4. Implemented Authentication flow (Repository, Service, Controller, Route) with Passport session-based auth backed by Redis.
 
-**Next Steps:**
-1. Implement Many-to-Many relationships (e.g., Workspace Members, Card Assignees) later as needed.
-2. Install and configure the PostgreSQL database connection and TypeORM DataSource.
-3. Set up the Repository pattern for database interactions.
+**Next Steps (Backend Core):**
+1. **Workspace Management:**
+   - Implement `WorkspaceRepository`, `WorkspaceService`, `WorkspaceController`, and routes.
+   - Support creating workspaces and adding members.
+2. **Board Management:**
+   - Implement `BoardRepository`, `BoardService`, `BoardController`, and routes.
+   - Support CRUD operations for boards within a workspace.
+3. **List & Card Management:**
+   - Implement repositories, services, and controllers for Lists and Cards.
+   - Support drag-and-drop operations (moving cards between lists) on the backend (updating positions/list IDs).
+4. **Validation & Authorization:**
+   - Implement Zod validation for all incoming requests in new controllers.
+   - Add middleware to check user permissions for specific workspaces and boards.
+5. **Real-time Features (WebSockets):**
+   - Integrate `socket.io` to broadcast board updates (card moves, edits) to all connected clients viewing the board.
+6. **File Attachments:**
+   - Use `multer` to handle file uploads for card attachments.

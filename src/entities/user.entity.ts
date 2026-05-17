@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column,
-         CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+         CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm'
 
-import WorkspaceMember from './workspaceMember.entity.js';
+import WorkspaceMember from './workspaceMember.entity.js'
 
 @Entity('users')
 export default class User {

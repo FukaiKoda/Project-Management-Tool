@@ -12,7 +12,7 @@ export default class AuthService {
         const { username, email, password } = userData
         const hash = await argon2.hash(password, { type: argon2.argon2id })
 
-        const user = this.authRepository.createUser({ username, email, password: hash })
+        const user = await this.authRepository.createUser({ username, email, password: hash })
         return user
     }
 
@@ -29,9 +29,10 @@ export default class AuthService {
             throw new AppError('Please login using your OAuth provider', 401)
         }
 
-        const isMatch = await argon2.verify(password, storedUser.password)
+        const isMatch = await argon2.verify(storedUser.password, password)
         
         if (!isMatch) {
+            console.error("PASSWORD doesn't match")
             throw new AppError('Invalid Credentials', 401)
         }
 

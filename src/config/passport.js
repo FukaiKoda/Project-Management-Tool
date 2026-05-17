@@ -1,8 +1,8 @@
+import { Strategy as LocalStrategy } from 'passport-local'
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
 import { Strategy as GithubStrategy } from 'passport-github2'
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from './env.js'
 import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } from './env.js'
-import { Strategy as LocalStrategy } from 'passport-local'
 
 export default function configurePassport(passport, authService) {
     

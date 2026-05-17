@@ -1,10 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column,
-         CreateDateColumn, UpdateDateColumn, ManyToOne, 
-         OneToMany} from 'typeorm';
+         CreateDateColumn, UpdateDateColumn, OneToMany} from 'typeorm'
 
-import User from './user.entity.js';
-import Board from './board.entity.js';
-import WorkspaceMember from './workspaceMember.entity.js';
+import Board from './board.entity.js'
+import WorkspaceMember from './workspaceMember.entity.js'
 
 @Entity('workspaces')
 export default class Workspace {

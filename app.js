@@ -60,7 +60,7 @@ app.use(session({
         httpOnly: true,             // (XSS protection)
         secure: false,              // sends cookies over https for localhost
         sameSite: 'lax',            // (CSRF protection)
-        maxAge: 1000 * 60 * 60 * 24 // 1 Day expiration
+        maxAge: 1000 * 60 * 60 * 24 // 1 Day expiration 
     }
 }))
 

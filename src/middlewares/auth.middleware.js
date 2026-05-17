@@ -19,7 +19,7 @@ export default class AuthMiddleware {
         const result = signupSchema.safeParse({ username, email, password, confirmPassword })
 
         if (!result.success) {
-            return next(result.error.issues)
+            return next(new AppError(result.error.issues[0].message, 400))
         }
         
         req.body = {...req.body, ...result.data}
@@ -37,7 +37,7 @@ export default class AuthMiddleware {
         const result = loginSchema.safeParse({ username, password })
 
         if (!result.success) {
-            return next(result.error.issues)
+            return next(new AppError(result.error.issues[0].message, 400))
         }
         
         req.body = {...req.body, ...result.data}

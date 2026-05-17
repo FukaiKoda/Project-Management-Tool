@@ -7,7 +7,7 @@ export default class AuthRepository {
         this.userRepository = AppDataSource.getRepository(User)
     }
 
-    CreateUser = async (userData) => {
+    createUser = async (userData) => {
         
         const user = this.userRepository.create(userData)
         return await this.userRepository.save(user)
