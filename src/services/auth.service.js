@@ -32,7 +32,6 @@ export default class AuthService {
         const isMatch = await argon2.verify(storedUser.password, password)
         
         if (!isMatch) {
-            console.error("PASSWORD doesn't match")
             throw new AppError('Invalid Credentials', 401)
         }
 

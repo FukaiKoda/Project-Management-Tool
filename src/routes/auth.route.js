@@ -5,19 +5,15 @@ import { authMiddleware, authController, passport } from '../containers/auth.con
 const authRouter = express.Router()
 
 authRouter.post('/signup', authMiddleware.signup, authController.signup)
-
 authRouter.post('/login', authMiddleware.login, passport.authenticate('local'), authController.login)
-
-authRouter.post('/logout', authController.logout)
+authRouter.post('/logout', authMiddleware.isAuthenticated, authController.logout)
 
 authRouter.post('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
-
 authRouter.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }),
     (req, res) => { res.redirect(`${HOST}:${PORT}/dashboard`) }
 )
 
 authRouter.get('/github', passport.authenticate('github', { scope: [ 'user:email' ] }))
-
 authRouter.get('/github/callback', passport.authenticate('github', { failureRedirect: '/' }),
     (req, res) => { res.redirect(`${HOST}:${PORT}/dashboard`) }
 )

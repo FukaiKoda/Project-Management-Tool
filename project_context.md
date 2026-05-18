@@ -55,11 +55,12 @@ We have established the database layer with TypeORM and implemented the authenti
 2. Created core TypeORM entities: `User`, `Workspace`, `Board`, `List`, `Card`, and `WorkspaceMember`.
 3. Configured PostgreSQL database connection and TypeORM DataSource in `src/config/data-source.js` and initialized it in `app.js`.
 4. Implemented Authentication flow (Repository, Service, Controller, Route) with Passport session-based auth backed by Redis.
+5. Implemented Workspace Management CRUD operations (Repository, Service, Controller, Route) with scoped access.
 
 **Next Steps (Backend Core):**
-1. **Workspace Management:**
-   - Implement `WorkspaceRepository`, `WorkspaceService`, `WorkspaceController`, and routes.
-   - Support creating workspaces and adding members.
+1. **Workspace Member Management:**
+   - Implement endpoints to add and remove members from a workspace.
+   - Implement role-based checks for member management.
 2. **Board Management:**
    - Implement `BoardRepository`, `BoardService`, `BoardController`, and routes.
    - Support CRUD operations for boards within a workspace.

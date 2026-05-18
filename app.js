@@ -3,16 +3,17 @@ import rateLimit from 'express-rate-limit'
 import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
+import 'reflect-metadata'
 import path from 'path'
 import session from 'express-session'
 import { passport } from './src/containers/auth.container.js'
 import { createClient } from 'redis'
 import { RedisStore } from 'connect-redis'
 import { REDIS_URL, SESSION_SECRET } from './src/config/env.js'
-import 'reflect-metadata'
 import AppDataSource from './src/config/data-source.js'
 
 import authRouter from './src/routes/auth.route.js'
+import workspaceRouter from './src/routes/workspace.route.js'
 
 import { setupSwagger } from './src/config/swagger.js'
 
@@ -75,6 +76,8 @@ AppDataSource.initialize()
         process.exit(1)
     })
 
-app.use('/api/v1/auth/', authRouter)
+app.use('/api/v1/auth', authRouter)
+
+app.use('/api/v1/workspace', workspaceRouter)
 
 export default app
